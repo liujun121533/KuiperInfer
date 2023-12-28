@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(kuiper_infer)
+
+set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 include_directories(./include)
@@ -23,6 +25,7 @@ if (MSVC)
     # Force LLVM OpenMP on MSVC
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /openmp:llvm /openmp:experimental /arch:AVX2")
 endif ()
+set(BUILD_DEMO ON)
 option(BUILD_DEMO "BUILD THE DEMO PROJECT")
 
 if (BUILD_DEMO)
@@ -68,6 +71,7 @@ target_include_directories(kuiper PUBLIC ${Armadillo_INCLUDE_DIR})
 # mathfun library defines
 add_compile_definitions(SSE_MATHFUN_WITH_CODE USE_SSE_AUTO)
 # 本项目的开发者请使用set(DEVELOPMENT ON)或者在cmake中添加-DDEVELOPMENT=ON将选项打开
+set(DEVELOPMENT ON)
 option(DEVELOPMENT ON)
 if (${DEVELOPMENT})
     message(STATUS "DEVELOPMENT MODE ON")
